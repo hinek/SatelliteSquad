@@ -1,0 +1,125 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PowerUpSelect.gd" type="Script" id=1]
+
+[node name="PowerUpSelect" type="Node2D"]
+z_index = 100
+script = ExtResource( 1 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_top = 50.0
+margin_right = 1080.0
+margin_bottom = 240.0
+color = Color( 0.498039, 0.498039, 0.498039, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button1" type="ColorRect" parent="Background"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 180.0
+margin_bottom = 180.0
+color = Color( 0.498039, 0.498039, 0.498039, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Satellite" type="Polygon2D" parent="Background/Button1"]
+position = Vector2( 86, 86 )
+scale = Vector2( 3, 3 )
+color = Color( 0.192157, 0.219608, 0.447059, 1 )
+polygon = PoolVector2Array( 0, -20, 16, -8, 8, -0.00012207, 16, 8, 0, 20, -16, 8, -8, -0.00012207, -16, -8 )
+__meta__ = {
+"_editor_description_": "	"
+}
+
+[node name="Plus" type="Polygon2D" parent="Background/Button1"]
+position = Vector2( 14, 0 )
+color = Color( 0, 1, 0, 1 )
+polygon = PoolVector2Array( 86, 120, 106, 120, 106, 100, 130, 100, 130, 120, 150, 120, 150, 144, 130, 144, 130, 164, 106, 164, 106, 144, 86, 144 )
+
+[node name="Button2" type="ColorRect" parent="Background"]
+margin_left = 190.0
+margin_top = 10.0
+margin_right = 370.0
+margin_bottom = 180.0
+color = Color( 0.498039, 0.498039, 0.498039, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LaserSlow1" type="Polygon2D" parent="Background/Button2"]
+position = Vector2( 60, 64 )
+scale = Vector2( 2, 2 )
+color = Color( 0.184314, 0.737255, 0.137255, 1 )
+antialiased = true
+polygon = PoolVector2Array( -2, -8, 2, -8, 2, 8, -2, 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="LaserSlow2" type="Polygon2D" parent="Background/Button2"]
+position = Vector2( 60, 144 )
+scale = Vector2( 2, 2 )
+color = Color( 0.184314, 0.737255, 0.137255, 1 )
+antialiased = true
+polygon = PoolVector2Array( -2, -8, 2, -8, 2, 8, -2, 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="LaserFast1" type="Polygon2D" parent="Background/Button2"]
+position = Vector2( 120, 24 )
+scale = Vector2( 2, 2 )
+color = Color( 0.184314, 0.737255, 0.137255, 1 )
+antialiased = true
+polygon = PoolVector2Array( -2, -8, 2, -8, 2, 8, -2, 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="LaserFast2" type="Polygon2D" parent="Background/Button2"]
+position = Vector2( 120, 64 )
+scale = Vector2( 2, 2 )
+color = Color( 0.184314, 0.737255, 0.137255, 1 )
+antialiased = true
+polygon = PoolVector2Array( -2, -8, 2, -8, 2, 8, -2, 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="LaserFast3" type="Polygon2D" parent="Background/Button2"]
+position = Vector2( 120, 104 )
+scale = Vector2( 2, 2 )
+color = Color( 0.184314, 0.737255, 0.137255, 1 )
+antialiased = true
+polygon = PoolVector2Array( -2, -8, 2, -8, 2, 8, -2, 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="LaserFast4" type="Polygon2D" parent="Background/Button2"]
+position = Vector2( 120, 144 )
+scale = Vector2( 2, 2 )
+color = Color( 0.184314, 0.737255, 0.137255, 1 )
+antialiased = true
+polygon = PoolVector2Array( -2, -8, 2, -8, 2, 8, -2, 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Button3" type="ColorRect" parent="Background"]
+margin_left = 380.0
+margin_top = 10.0
+margin_right = 560.0
+margin_bottom = 180.0
+color = Color( 0.498039, 0.498039, 0.498039, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonkeyWrench" type="Polygon2D" parent="Background/Button3"]
+color = Color( 0.192157, 0.219608, 0.447059, 1 )
+polygon = PoolVector2Array( 20, 28, 36, 44, 44, 44, 52, 36, 52, 28, 36, 12, 52, 12, 68, 20, 76, 28, 84, 44, 84, 60, 116, 92, 132, 92, 148, 100, 156, 108, 164, 124, 164, 140, 148, 124, 140, 124, 132, 132, 132, 140, 148, 156, 132, 156, 116, 148, 108, 140, 100, 124, 100, 108, 68, 76, 52, 76, 36, 68, 28, 60, 20, 44 )
+[connection signal="visibility_changed" from="." to="." method="_on_PowerUpSelect_visibility_changed"]
