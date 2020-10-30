@@ -16,7 +16,7 @@ func _process(delta):
 
 func hit(damage):
 	if damage > 0:
-		get_tree().current_scene.call_deferred("add_score", 20)
+		get_tree().current_scene.call_deferred("enemy_killed", 20)
 		destroy()
 
 

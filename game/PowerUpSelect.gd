@@ -33,3 +33,5 @@ func _on_PowerUpSelect_visibility_changed():
 	$Background/Button1.visible = gameLoop.satellite_count < gameLoop.MAX_SATELLITE_COUNT
 	$Background/Button2.visible = gameLoop.fire_interval > gameLoop.MIN_FIRE_INTERVAL
 	$Background/Button3.visible = gameLoop.center_ship_health < gameLoop.MAX_CENTER_SHIP_HEALTH
+	if !($Background/Button1.visible || $Background/Button2.visible || $Background/Button3.visible):
+		hide()

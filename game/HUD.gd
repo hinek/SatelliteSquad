@@ -13,4 +13,18 @@ export var health = 0 setget set_health
 
 func set_health(value):
 	health = value
-	$Health.text = "Health: %2d" % [value]
+	$Health.text = "♥ %2d" % [value]
+
+
+export var wave = 0 setget set_wave
+
+func set_wave(value):
+	wave = value
+	$Wave.text = "↓ %03d" % [value]
+
+
+export var killed = 0 setget set_killed
+
+func set_killed(value):
+	killed = value
+	$Killed.text = "× %d" % [value]

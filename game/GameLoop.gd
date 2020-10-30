@@ -1,5 +1,9 @@
 extends Node2D
 
+const MAX_SATELLITE_COUNT = 6
+const MAX_CENTER_SHIP_HEALTH = 50
+const MIN_FIRE_INTERVAL = 0.2
+
 var satellite_type = preload("res://Satellite.tscn")
 var bullet_type = preload("res://Bullet.tscn")
 var powerup_type = preload("res://PowerUp.tscn")
@@ -10,14 +14,26 @@ var enemy_types = [
 	]
 
 var rng = RandomNumberGenerator.new()
-
-
+var game_over = false
 var score = 0
+var satellite_direction = 1
+var satellite_count = 1
+var center_ship_health = MAX_CENTER_SHIP_HEALTH
+
+var fire_interval = 1.5
+var time_to_fire = fire_interval
+var bullet_speed = 300
+
+var wave = 1
+var enemy_interval = 2.0
+var time_to_next_enemy = enemy_interval
+var enemy_spawn_width = 160 #280 400
+var enemies_spawned = 0
+var enemies_killed = 0
+
 func add_score(value_to_add):
 	score += value_to_add
 	$HUD.score = score
-	if score % 100 == 0:
-		create_powerup()
 
 
 func powerup_collected():
@@ -28,25 +44,6 @@ func powerup_collected():
 
 func _ready():
 	rng.randomize()
-
-
-const MAX_SATELLITE_COUNT = 6
-const MAX_CENTER_SHIP_HEALTH = 50
-const MIN_FIRE_INTERVAL = 0.2
-
-var game_over = false
-var satellite_direction = 1
-var satellite_count = 1
-var center_ship_health = MAX_CENTER_SHIP_HEALTH
-
-var fire_interval = .5 # 1.5
-var time_to_fire = fire_interval
-var bullet_speed = 300
-
-var enemy_interval = 1.5
-var time_to_next_enemy = enemy_interval
-var enemy_spawn_width = 160 #280 400
-var enemy_count = 0
 
 
 func _input(event):
@@ -69,6 +66,14 @@ func _process(delta):
 	move_bullets(delta)
 
 
+func enemy_killed(score):
+	add_score(score)
+	enemies_killed += 1
+	$HUD.killed = enemies_killed
+	if (enemies_killed - 10) % 15 == 0:
+		create_powerup()
+
+
 func create_powerup():
 	if game_over:
 		return
@@ -81,12 +86,21 @@ func create_powerup():
 func create_enemy():
 	if game_over:
 		return
-	var enemy = enemy_types[rng.randi_range(0, enemy_types.size() - 1)].instance()
+	var enemy = enemy_types[rng.randi_range(0, (wave - 1) % enemy_types.size())].instance()
 	var x = rng.randf_range(-enemy_spawn_width, enemy_spawn_width) + $CenterShip.position.x
 	enemy.position = Vector2(x, -40)
-	enemy.name = "Enemy" + str(enemy_count)
+	enemy.name = "Enemy" + str(enemies_spawned)
 	$Enemies.add_child(enemy)
-	enemy_count += 1
+	enemies_spawned += 1
+	if enemies_spawned % 20 == 0:
+		next_wave()
+
+
+func next_wave():
+	wave += 1
+	$HUD.wave = wave
+	if (wave - 1) % 3 == 0 && enemy_interval > 0.5:
+		enemy_interval -= 0.2
 
 
 func add_satellite():
@@ -127,7 +141,6 @@ func recalculate_satellite_infos():
 		if satellite.distance > enemy_spawn_width:
 			enemy_spawn_width = satellite.distance
 	satellite_count = $Satellites.get_child_count()
-	print(satellite_count)
 	if (satellite_count == 0):
 		queue_game_over()
 
@@ -181,6 +194,7 @@ func repair_center_ship():
 
 func queue_game_over():
 	game_over = true
+	$PowerUpSelect.hide()
 	for num in (30):
 		var explosion = load("res://Explosion.tscn").instance()
 		explosion.position = Vector2(rng.randf_range(-50, 50) + $CenterShip.position.x, rng.randf_range(-50, 100) + $CenterShip.position.y)
