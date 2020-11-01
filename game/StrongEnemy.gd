@@ -7,11 +7,14 @@ func _ready():
 
 var health = 10
 
+var booster_seq = 0
 
 func _process(delta):
 	position.y += 90 * delta
 	if position.y > 2000:
 		queue_free()
+	booster_seq = fmod(booster_seq + delta * 200, 30)
+	$Polygon2DBooster.polygon[2].y = -30 - booster_seq
 
 
 func hit(damage):

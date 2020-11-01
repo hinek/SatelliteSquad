@@ -6,8 +6,7 @@
 radius = 32.0
 
 [sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0.225166, 0.887417 )
-colors = PoolColorArray( 0, 1, 0, 1, 0, 0.196078, 0, 1 )
+colors = PoolColorArray( 0.0431373, 1, 0.901961, 1, 0.00392157, 0.796078, 0.811765, 0.498039 )
 
 [node name="PowerUp" type="Area2D"]
 script = ExtResource( 1 )
@@ -16,7 +15,7 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color( 0, 1, 0, 1 )
+color = Color( 0.00392157, 0.533333, 0.647059, 1 )
 polygon = PoolVector2Array( -4, 32, 4, 32, 16, 28, 28, 16, 32, 4, 32, -4, 28, -16, 16, -28, 4, -32, -4, -32, -16, -28, -28, -16, -32, -4, -32, 4, -28, 16, -16, 28 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

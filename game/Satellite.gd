@@ -4,6 +4,7 @@ extends Area2D
 export var angle = 1.0
 export var distance = 160
 
+var booster_seq = 0
 var speed = 1.0
 var target_angle = 0
 
@@ -16,7 +17,6 @@ func _ready():
 
 func _process(delta):
 	var satellite_direction = get_tree().current_scene.satellite_direction
-	#$CPUParticles2D.direction.y = satellite_direction
 	angle += speed * delta * satellite_direction
 	if angle >= 2 * PI:
 		angle -= 2 * PI
@@ -38,6 +38,9 @@ func _process(delta):
 			rotation -= 2 * PI
 	
 	rotation = lerp(rotation, target_angle, delta * 20)
+	
+	booster_seq = fmod(booster_seq + delta * 200, 30)
+	$Polygon2DBooster.polygon[1].y = 40 - booster_seq
 
 
 func _on_Satellite_body_entered(body):
