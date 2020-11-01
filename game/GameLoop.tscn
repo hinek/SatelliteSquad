@@ -5,6 +5,7 @@
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://PowerUpSelect.tscn" type="PackedScene" id=4]
 [ext_resource path="res://PressStart2P.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://CenterShip.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -16,10 +17,6 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 0.498039, 0.498039, 0.498039, 1, 0.862745, 0.862745, 0.862745, 1 )
-
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 36.0
-height = 64.0002
 
 [node name="GameLoop" type="Node2D"]
 script = ExtResource( 1 )
@@ -48,8 +45,9 @@ __meta__ = {
 margin_left = 300.0
 margin_top = 400.0
 margin_right = 780.0
-margin_bottom = 50.0
+margin_bottom = 480.0
 custom_fonts/font = SubResource( 2 )
+shortcut_in_tooltip = false
 text = "Try again"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -71,51 +69,7 @@ scale_amount = 4.0
 scale_amount_random = 0.8
 color_ramp = SubResource( 3 )
 
-[node name="CenterShip" type="Area2D" parent="."]
-position = Vector2( 540, 1400 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CenterShip"]
-shape = SubResource( 4 )
-
-[node name="Polygon2D" type="Polygon2D" parent="CenterShip"]
-position = Vector2( 0, -24.0001 )
-z_index = 1
-color = Color( 0.192157, 0.219608, 0.447059, 1 )
-polygon = PoolVector2Array( 0, -52.0001, 20, -40.0001, 48, -8.00012, 32, 87.9999, 0, 99.9999, -32, 87.9999, -44, -8.00012, -20, -40.0001 )
-
-[node name="Drive1" type="CPUParticles2D" parent="CenterShip"]
-position = Vector2( -20, 60 )
-amount = 32
-direction = Vector2( 0, 1 )
-spread = 5.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 50.0
-initial_velocity_random = 0.2
-scale_amount = 3.0
-scale_amount_random = 0.5
-color = Color( 1, 0, 0, 1 )
-hue_variation = 1.0
-hue_variation_random = 0.1
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Drive2" type="CPUParticles2D" parent="CenterShip"]
-position = Vector2( 20, 60 )
-amount = 32
-direction = Vector2( 0, 1 )
-spread = 5.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 50.0
-initial_velocity_random = 0.2
-scale_amount = 3.0
-scale_amount_random = 0.5
-color = Color( 1, 0, 0, 1 )
-hue_variation = 1.0
-hue_variation_random = 0.1
-__meta__ = {
-"_editor_description_": ""
-}
+[node name="CenterShip" parent="." instance=ExtResource( 6 )]
 
 [node name="Satellites" type="Node2D" parent="."]
 position = Vector2( 540, 1400 )
@@ -129,4 +83,4 @@ position = Vector2( 160, 0 )
 
 [node name="Powerups" type="Node2D" parent="."]
 [connection signal="pressed" from="GameOver/TryAgainButton" to="." method="_on_TryAgainButton_pressed"]
-[connection signal="body_entered" from="CenterShip" to="." method="_on_CenterShip_body_entered"]
+[connection signal="center_ship_damaged" from="CenterShip" to="." method="_on_CenterShip_center_ship_damaged"]

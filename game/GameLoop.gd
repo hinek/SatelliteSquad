@@ -164,25 +164,20 @@ func move_bullets(delta):
 			bullet.queue_free()
 
 
-func _on_CenterShip_body_entered(body):
-	if body.name.begins_with("Enemy"):
-		body.destroy()
-		damage_center_ship(body.health * 5)
-
-
-func damage_center_ship(damage):
+func _on_CenterShip_center_ship_damaged(damage):
 	center_ship_health = clamp(center_ship_health - damage, 0, MAX_CENTER_SHIP_HEALTH)
 	$HUD.health = center_ship_health
 	if center_ship_health <= 0:
 		queue_game_over()
-	elif center_ship_health <= 10:
-		create_damage_fire(10,-30)
-	elif center_ship_health <= 20:
-		create_damage_fire(-15,30)
-	elif center_ship_health <= 30:
-		create_damage_fire(-30,-10)
-	elif center_ship_health <= 40:
-		create_damage_fire(20,40)
+	else:
+		if center_ship_health <= 10:
+			create_damage_fire(10,-30)
+		if center_ship_health <= 20:
+			create_damage_fire(-15,30)
+		if center_ship_health <= 30:
+			create_damage_fire(-30,-10)
+		if center_ship_health <= 40:
+			create_damage_fire(20,40)
 
 
 func repair_center_ship():
@@ -191,6 +186,7 @@ func repair_center_ship():
 	for child in $CenterShip.get_children():
 		if child.name.find ("DamageFire") > -1:
 			child.queue_free()
+
 
 func queue_game_over():
 	game_over = true
@@ -211,7 +207,8 @@ func queue_game_over():
 
 func create_damage_fire(x, y):
 	var fire = load("res://DamageFire.tscn").instance()
-	fire.position = Vector2(x,y)
+	fire.position = Vector2(rng.randf_range(-10, 10) + x, rng.randf_range(-10, 10) + y)
+	#fire.position = Vector2(x,y)
 	$CenterShip.add_child(fire)
 
 

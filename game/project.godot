@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Direction"
+config/name="Satellite Squad"
 run/main_scene="res://GameLoop.tscn"
 config/icon="res://icon.png"
 
