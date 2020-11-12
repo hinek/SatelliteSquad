@@ -8,9 +8,10 @@ var satellite_type = preload("res://Satellite.tscn")
 var bullet_type = preload("res://Bullet.tscn")
 var powerup_type = preload("res://PowerUp.tscn")
 var enemy_types = [
-	preload("res://SimpleEnemy.tscn"),
-	preload("res://FastEnemy.tscn"),
-	preload("res://StrongEnemy.tscn")
+	preload("res://enemies/SimpleEnemy.tscn"),
+	preload("res://enemies/FastEnemy.tscn"),
+	preload("res://enemies/StrongEnemy.tscn"),
+	preload("res://enemies/FollowEnemy.tscn")
 	]
 
 var rng = RandomNumberGenerator.new()
