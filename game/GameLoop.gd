@@ -11,7 +11,8 @@ var enemy_types = [
 	preload("res://enemies/SimpleEnemy.tscn"),
 	preload("res://enemies/FastEnemy.tscn"),
 	preload("res://enemies/StrongEnemy.tscn"),
-	preload("res://enemies/FollowEnemy.tscn")
+	preload("res://enemies/FollowEnemy.tscn"),
+	preload("res://enemies/ShootingEnemy.tscn")
 	]
 
 var rng = RandomNumberGenerator.new()
@@ -100,7 +101,7 @@ func create_enemy():
 func next_wave():
 	wave += 1
 	$HUD.wave = wave
-	if (wave - 1) % 3 == 0 && enemy_interval > 0.5:
+	if (wave - 1) % enemy_types.size() == 0 && enemy_interval > 0.5:
 		enemy_interval -= 0.2
 
 

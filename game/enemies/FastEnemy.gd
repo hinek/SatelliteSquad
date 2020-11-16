@@ -5,11 +5,13 @@ func _ready():
 	pass # Replace with function body.
 
 
+const speed = 300
+
 var health = 1
 
 
 func _process(delta):
-	position.y += 300 * delta
+	position.y += speed * delta
 	$Polygon2DBooster.polygon[2].y = fmod(position.y, 40) * -2
 	if position.y > 2000:
 		queue_free()

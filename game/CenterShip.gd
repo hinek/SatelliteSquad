@@ -17,3 +17,9 @@ func _on_CenterShip_body_entered(body):
 	if body.name.begins_with("Enemy"):
 		body.destroy()
 		emit_signal("center_ship_damaged", body.health * 5)
+
+
+func _on_CenterShip_area_entered(area):
+	if area.name.begins_with("EnemyBullet"):
+		area.destroy()
+		emit_signal("center_ship_damaged", 1)

@@ -5,13 +5,15 @@ func _ready():
 	pass # Replace with function body.
 
 
+const speed = 100
+
 var health = 1
 
 var booster_seq = 0
 
 
 func _process(delta):
-	position.y += 100 * delta
+	position.y += speed * delta
 	if position.y > 2000:
 		queue_free()
 	booster_seq = fmod(booster_seq + delta * 200, 30)

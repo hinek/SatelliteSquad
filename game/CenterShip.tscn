@@ -22,15 +22,15 @@ polygon = PoolVector2Array( 0, -52, 16, -36, 36, -8, 24, 82, 0, 100, 32, 88, 48,
 
 [node name="Polygon2DWindow1" type="Polygon2D" parent="Polygon2DShip"]
 position = Vector2( 0, 25 )
-color = Color( 0.00392157, 0.796078, 0.811765, 1 )
+color = Color( 0.00392157, 0.533333, 0.647059, 1 )
 polygon = PoolVector2Array( 0, -71, 6, -67, 0, -53, -6, -67 )
 
 [node name="Polygon2DWindow2" type="Polygon2D" parent="Polygon2DShip"]
-color = Color( 0.00392157, 0.796078, 0.811765, 1 )
+color = Color( 0.00392157, 0.533333, 0.647059, 1 )
 polygon = PoolVector2Array( 10, -40, 18, -34, 4, -28 )
 
 [node name="Polygon2DWindow3" type="Polygon2D" parent="Polygon2DShip"]
-color = Color( 0.00392157, 0.796078, 0.811765, 1 )
+color = Color( 0.00392157, 0.533333, 0.647059, 1 )
 polygon = PoolVector2Array( -10, -40, -18, -34, -4, -28 )
 
 [node name="Polygon2DBooster1" type="Polygon2D" parent="."]
@@ -50,4 +50,5 @@ polygon = PoolVector2Array( -4, 12, 4, 60, 12, 12 )
 __meta__ = {
 "_editor_description_": ""
 }
+[connection signal="area_entered" from="." to="." method="_on_CenterShip_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_CenterShip_body_entered"]
